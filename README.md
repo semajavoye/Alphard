@@ -16,10 +16,10 @@ Alphard is a sophisticated open-source project designed for enabling remote acce
 
 To get started with Alphard, follow these simple steps:
 
-1. Clone the Alphard repository from [GitHub](https://github.com/alphard-project).
+1. Clone the Alphard repository from [GitHub](https://github.com/semajavoye/Alphard).
 
    ```bash
-   git clone https://github.com/alphard-project/alphard.git
+   git clone https://github.com/semajavoye/Alphard.git
 2. Navigate to the project Directory.
     ```bash
     cd alphard
