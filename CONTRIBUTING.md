@@ -9,7 +9,7 @@ Thank you for considering contributing to Alphard! Your contributions help make 
 2. **Clone the forked repository to your local machine.**
 
    ```bash
-   git clone https://github.com/your-username/alphard.git
+   git clone https://github.com/semajavoye/Alphard.git
    ```
 
 3. **Create a new branch for your feature or bug fix.**
@@ -42,7 +42,7 @@ Please adhere to the following coding conventions when contributing to Alphard:
 
 ## Report Issues
 
-If you encounter any issues or have suggestions for improvements, please open an issue on the [GitHub Issues](https://github.com/alphard-project/alphard/issues) page.
+If you encounter any issues or have suggestions for improvements, please open an issue on the [GitHub Issues](https://github.com/semajavoye/Alphard/issues) page.
 
 ## Feature Requests
 
