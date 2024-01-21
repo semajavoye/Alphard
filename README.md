@@ -23,9 +23,9 @@ To get started with Alphard, follow these simple steps:
 2. Navigate to the project Directory.
     ```bash
     cd alphard
-3. Install the required dependencies.
+3. Insall the reqtuired dependencies.
     ```python
-    pip install -r requirements.txt
+    python setup.py
 
 ## Usage
 1. Launch Alphard.
