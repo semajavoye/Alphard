@@ -1,6 +1,3 @@
-Certainly! Here's the CONTRIBUTING.md content in Markdown format:
-
-```markdown
 # Contributing to Alphard
 
 Thank you for considering contributing to Alphard! Your contributions help make this project better.
