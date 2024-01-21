@@ -87,7 +87,14 @@ class Alphard(tk.Tk):
 
     def show_about(self):
         about_text = "Alphard V 0.2\n\n"
+        about_text += "Alphard is a simple tkinter-based application for managing remote Destops.\n"
+        about_text += "Developed by Semaaj Voye\n"
+        about_text += "Contact Discord: letsplay\n"
+        about_text += "GitHub: https://github.com/semajavoye/Alphard\n\n"
+        about_text += "© 2024 Semaja Voyé. All rights reserved."
+
         messagebox.showinfo("About", about_text)
+
 
 if __name__ == "__main__":
     app = Alphard()
