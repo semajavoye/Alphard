@@ -119,27 +119,27 @@ class Alphard(tk.Tk):
         self.tree.heading("uptime", text=self.translation["tree"]["uptime"])
 
         # Pack the Treeview widget
-        self.tree.pack(pady=20)
+        self.tree.pack(fill="both", expand=True)
 
     def new_file(self):
-        messagebox.showinfo("New", "Creating a new file")
+        messagebox.showinfo(self.translation["file_menu"]["new"], self.translation["dialogs"]["new_file"])
 
     def open_file(self):
-        file_path = filedialog.askopenfilename(title="Open File", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+        file_path = filedialog.askopenfilename(title=self.translation["dialogs"]["open_filelabel"], filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
         if file_path:
-            messagebox.showinfo("Open", f"Opening file: {file_path}")
+            messagebox.showinfo(self.translation["file_menu"]["open"], f"Opening file: {file_path}")
 
     def save_file(self):
-        file_path = filedialog.asksaveasfilename(title="Save File", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+        file_path = filedialog.asksaveasfilename(title=self.translation["dialogs"]["save_filelabel"], filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
         if file_path:
-            messagebox.showinfo("Save", f"Saving file to: {file_path}")
+            messagebox.showinfo(self.translation["file_menu"]["save"], f"Saving file to: {file_path}")
             
     def settings(self):
         settings_window = SettingsWindow(self, self.available_languages)
         
 
     def exit_app(self):
-        if messagebox.askyesno("Exit", "Do you really want to exit?"):
+        if messagebox.askyesno(self.translation["file_menu"]["exit"], self.translation["dialogs"]["exit_app"]):
             self.destroy()
 
     # Additional methods for Edit menu

@@ -26,7 +26,9 @@ LANGUAGES = {
         "dialogs": {
             "new_file": "Creating a new file",
             "open_file": "Opening file: {file_path}",
+            "open_filelabel": "Open File",
             "save_file": "Saving file to: {file_path}",
+            "save_filelabel": "Save File",
             "exit_app": "Do you really want to exit?",
             "cut": "Cutting selected text",
             "copy": "Copying selected text",
@@ -70,7 +72,9 @@ LANGUAGES = {
         "dialogs": {
             "new_file": "Erstelle eine neue Datei",
             "open_file": "Öffne Datei: {file_path}",
+            "open_filelabel": "Datei öffnen",
             "save_file": "Speichere Datei unter: {file_path}",
+            "save_filelabel": "Datei speichern",
             "exit_app": "Wollen Sie das Programm wirklich beenden?",
             "cut": "Schneide den markierten Text aus",
             "copy": "Kopiere den markierten Text",
