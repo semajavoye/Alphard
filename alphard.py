@@ -1,10 +1,53 @@
 import tkinter as tk
 from tkinter import Menu, messagebox, filedialog, ttk
+from language import get_translation
+
+class SettingsWindow(tk.Toplevel):
+    def __init__(self, parent):
+        tk.Toplevel.__init__(self, parent)
+        self.title("Settings")
+        self.parent = parent
+    
+    def create_menu(self):
+        menu_bar = Menu(self)
+        self.config(menu=menu_bar)
+
+        # File menu
+        file_menu = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label=self.translation["file_menu"]["file"], menu=file_menu)
+
+        # File menu subcategories
+        file_menu.add_command(label=self.translation["file_menu"]["new"], command=self.new_file)
+        file_menu.add_command(label=self.translation["file_menu"]["open"], command=self.open_file)
+        file_menu.add_command(label=self.translation["file_menu"]["save"], command=self.save_file)
+        file_menu.add_separator()
+        file_menu.add_command(label=self.translation["file_menu"]["settings"], command=self.settings)
+        file_menu.add_command(label=self.translation["file_menu"]["exit"], command=self.exit_app)
+
+        # Edit menu
+        edit_menu = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label=self.translation["edit_menu"]["edit"], menu=edit_menu)
+
+        # Edit menu subcategories
+        edit_menu.add_command(label=self.translation["edit_menu"]["cut"], command=self.cut)
+        edit_menu.add_command(label=self.translation["edit_menu"]["copy"], command=self.copy)
+        edit_menu.add_command(label=self.translation["edit_menu"]["paste"], command=self.paste)
+
+        # Help menu
+        help_menu = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label=self.translation["help_menu"]["help"], menu=help_menu)
+        help_menu.add_command(label=self.translation["help_menu"]["about"], command=self.show_about)
 
 class Alphard(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Alphard V 0.2")
+        
+        # Set the window size to 1920x1080 and maximize it
+        self.geometry("1920x1080")
+        self.state('zoomed')
+        
+        self.translation = get_translation()
 
         self.create_menu()
         self.create_table()
@@ -15,28 +58,29 @@ class Alphard(tk.Tk):
 
         # File menu
         file_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="File", menu=file_menu)
+        menu_bar.add_cascade(label=self.translation["file_menu"]["file"], menu=file_menu)
 
         # File menu subcategories
-        file_menu.add_command(label="New", command=self.new_file)
-        file_menu.add_command(label="Open", command=self.open_file)
-        file_menu.add_command(label="Save", command=self.save_file)
+        file_menu.add_command(label=self.translation["file_menu"]["new"], command=self.new_file)
+        file_menu.add_command(label=self.translation["file_menu"]["open"], command=self.open_file)
+        file_menu.add_command(label=self.translation["file_menu"]["save"], command=self.save_file)
         file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.exit_app)
+        file_menu.add_command(label=self.translation["file_menu"]["settings"], command=self.settings)
+        file_menu.add_command(label=self.translation["file_menu"]["exit"], command=self.exit_app)
 
         # Edit menu
         edit_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Edit", menu=edit_menu)
+        menu_bar.add_cascade(label=self.translation["edit_menu"]["edit"], menu=edit_menu)
 
         # Edit menu subcategories
-        edit_menu.add_command(label="Cut", command=self.cut)
-        edit_menu.add_command(label="Copy", command=self.copy)
-        edit_menu.add_command(label="Paste", command=self.paste)
+        edit_menu.add_command(label=self.translation["edit_menu"]["cut"], command=self.cut)
+        edit_menu.add_command(label=self.translation["edit_menu"]["copy"], command=self.copy)
+        edit_menu.add_command(label=self.translation["edit_menu"]["paste"], command=self.paste)
 
         # Help menu
         help_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Help", menu=help_menu)
-        help_menu.add_command(label="About", command=self.show_about)
+        menu_bar.add_cascade(label=self.translation["help_menu"]["help"], menu=help_menu)
+        help_menu.add_command(label=self.translation["help_menu"]["about"], command=self.show_about)
 
     def create_table(self):
         # Create a Treeview widget
@@ -75,6 +119,10 @@ class Alphard(tk.Tk):
         file_path = filedialog.asksaveasfilename(title="Save File", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
         if file_path:
             messagebox.showinfo("Save", f"Saving file to: {file_path}")
+            
+    def settings(self):
+        settings_window = SettingsWindow(self)
+        
 
     def exit_app(self):
         if messagebox.askyesno("Exit", "Do you really want to exit?"):

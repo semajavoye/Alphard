@@ -4,17 +4,21 @@ import json
 LANGUAGES = {
     "en": {
         "file_menu": {
+            "file": "File",
             "new": "New",
             "open": "Open",
             "save": "Save",
+            "settings": "Settings",
             "exit": "Exit",
         },
         "edit_menu": {
+            "edit": "Edit",
             "cut": "Cut",
             "copy": "Copy",
             "paste": "Paste",
         },
         "help_menu": {
+            "help": "Help",
             "about": "About",
         },
         "dialogs": {
@@ -30,17 +34,21 @@ LANGUAGES = {
     },
     "ger": {
         "file_menu": {
+            "file": "Datei",
             "new": "Neu",
             "open": "Öffnen",
             "save": "Speichern",
+            "settings": "Eintellungen",
             "exit": "Beenden",
         },
         "edit_menu": {
+            "edit": "Bearbeiten",
             "cut": "Ausschneiden",
             "copy": "Kopieren",
             "paste": "Einfügen",
         },
         "help_menu": {
+            "help": "Hilfe",
             "about": "Info",
         },
         "dialogs": {
