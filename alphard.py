@@ -1,9 +1,10 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QMenuBar, QAction, QLabel, QComboBox, QPushButton, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QMessageBox, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QMenuBar, QAction, QLabel, QComboBox, QPushButton, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QMessageBox, QFileDialog, QSizePolicy, QHeaderView  # Add this line
 from PyQt5.QtCore import Qt
 import json
 from language import get_translation, get_languages, get_settinglanguage
 import check_github_version as alphard_version
+
 
 # alphard_version.main()
 
@@ -130,18 +131,22 @@ class Alphard(QMainWindow):
         self.table = QTableWidget(self)
         self.table.setColumnCount(9)
         self.table.setHorizontalHeaderLabels([self.translation["tree"]["ipadr"],
-                                             self.translation["tree"]["tag"],
-                                             self.translation["tree"]["userpc"],
-                                             self.translation["tree"]["version"],
-                                             self.translation["tree"]["status"],
-                                             self.translation["tree"]["userstatus"],
-                                             self.translation["tree"]["country"],
-                                             self.translation["tree"]["os"],
-                                             self.translation["tree"]["uptime"]])
+                                            self.translation["tree"]["tag"],
+                                            self.translation["tree"]["userpc"],
+                                            self.translation["tree"]["version"],
+                                            self.translation["tree"]["status"],
+                                            self.translation["tree"]["userstatus"],
+                                            self.translation["tree"]["country"],
+                                            self.translation["tree"]["os"],
+                                            self.translation["tree"]["uptime"]])
 
-        # Set up layout
+        # Set up layout with QSizePolicy
         layout = QVBoxLayout()
         layout.addWidget(self.table)
+
+        # Set the size policy to Expanding for both directions
+        self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
@@ -213,11 +218,12 @@ class Alphard(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    
+
     # Set the application style to a darker mode
     app.setStyle("Fusion")
     palette = app.palette()
-    palette.setColor(palette.Window, Qt.darkGray)
+    # Make the dark mode more dark
+    palette.setColor(palette.Window, Qt.gray)
     palette.setColor(palette.WindowText, Qt.white)
     app.setPalette(palette)
 
