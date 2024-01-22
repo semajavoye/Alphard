@@ -40,17 +40,22 @@ class Alphard(tk.Tk):
 
     def create_table(self):
         # Create a Treeview widget
-        self.tree = ttk.Treeview(self, columns=("Name", "Age", "Occupation"), show="headings")
+        self.tree = ttk.Treeview(self, columns=("ipadr", "tag", "userpc", "version", "status", "userstatus", "country", "os", "uptime"), show="headings")
+
 
         # Define column headings
-        self.tree.heading("Name", text="Name")
-        self.tree.heading("Age", text="Age")
-        self.tree.heading("Occupation", text="Occupation")
+        self.tree.heading("ipadr", text="IP Adress")
+        self.tree.heading("tag", text="Tag")
+        self.tree.heading("userpc", text="User@PC")
+        self.tree.heading("version", text="Version")
+        self.tree.heading("status", text="Status")
+        self.tree.heading("userstatus", text="User Status")
+        self.tree.heading("country", text="Country")
+        self.tree.heading("os", text="Operating System")
+        self.tree.heading("uptime", text="Uptime")
 
         # Insert some sample data
-        data = [("John Doe", 30, "Engineer"),
-                ("Jane Smith", 25, "Teacher"),
-                ("Bob Johnson", 35, "Doctor")]
+        data = []
 
         for item in data:
             self.tree.insert("", "end", values=item)
@@ -88,7 +93,7 @@ class Alphard(tk.Tk):
     def show_about(self):
         about_text = "Alphard V 0.2\n\n"
         about_text += "Alphard is a simple tkinter-based application for managing remote Destops.\n"
-        about_text += "Developed by Semaaj Voye\n"
+        about_text += "Developed by Semaja Voye\n"
         about_text += "Contact Discord: letsplay\n"
         about_text += "GitHub: https://github.com/semajavoye/Alphard\n\n"
         about_text += "© 2024 Semaja Voyé. All rights reserved."
