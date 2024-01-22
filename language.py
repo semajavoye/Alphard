@@ -3,6 +3,8 @@ import json
 
 LANGUAGES = {
     "en": {
+        "alphard": "Alphard",
+        "language": "Language",
         "file_menu": {
             "file": "File",
             "new": "New",
@@ -29,16 +31,30 @@ LANGUAGES = {
             "cut": "Cutting selected text",
             "copy": "Copying selected text",
             "paste": "Pasting clipboard content",
+            "aboutlabel": "About",
             "about": "Alphard V 0.2\n\nAlphard is a simple tkinter-based application for managing remote Destops.\nDeveloped by Semaja Voye\nContact Discord: letsplay\nGitHub: https://github.com/semajavoye/Alphard\n\n© 2024 Semaja Voyé. All rights reserved."
         },
+        "tree": {
+            "ipadr": "IP Address",
+            "tag": "Tag",
+            "userpc": "User@PC",
+            "version": "Version",
+            "status": "Status",
+            "userstatus": "User Status",
+            "country": "Country",
+            "os": "Operating System",
+            "uptime": "Uptime"
+        }
     },
     "ger": {
+        "alphard": "Alphard",
+        "language": "Sprache",
         "file_menu": {
             "file": "Datei",
             "new": "Neu",
             "open": "Öffnen",
             "save": "Speichern",
-            "settings": "Eintellungen",
+            "settings": "Einstellungen",
             "exit": "Beenden",
         },
         "edit_menu": {
@@ -59,8 +75,20 @@ LANGUAGES = {
             "cut": "Schneide den markierten Text aus",
             "copy": "Kopiere den markierten Text",
             "paste": "Füge den Inhalt der Zwischenablage ein",
+            "aboutlabel": "Über",
             "about": "Alphard V 0.2\n\nAlphard ist eine einfache Anwendung zur Verwaltung von Remote Destops.\nEntwickelt von Semaja Voye\nKontakt Discord: letsplay\nGitHub: https://github.com/semajavoye/Alphard\n\n© 2024 Semaja Voyé. All rights reserved."
         },
+        "tree": {
+            "ipadr": "IP Addresse",
+            "tag": "Label",
+            "userpc": "Benutzer@PC",
+            "version": "Version",
+            "status": "Status",
+            "userstatus": "Benutzer Status",
+            "country": "Land",
+            "os": "Betriebssystem",
+            "uptime": "Betriebszeit"
+        }
     },
 }
 

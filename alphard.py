@@ -1,11 +1,22 @@
 import tkinter as tk
 from tkinter import Menu, messagebox, filedialog, ttk
+import json
 from language import get_translation
+
+def get_version():
+    with open("settings.json", "r") as f:
+        settings = json.load(f)
+        version = settings["version"]
+    return version
 
 class SettingsWindow(tk.Toplevel):
     def __init__(self, parent):
+        self.translation = get_translation()
         tk.Toplevel.__init__(self, parent)
-        self.title("Settings")
+        self.title(self.translation["file_menu"]["settings"])
+        
+        self.geometry("680x560")
+        
         self.parent = parent
     
     def create_menu(self):
@@ -27,6 +38,14 @@ class SettingsWindow(tk.Toplevel):
         # Edit menu
         edit_menu = Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label=self.translation["edit_menu"]["edit"], menu=edit_menu)
+        
+        
+        menu_bar = Menu(self)
+        self.config(menu=menu_bar)
+        
+        # Dropdown menu
+        dropdown_menu = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label=self.translation["language"], menu=dropdown_menu)
 
         # Edit menu subcategories
         edit_menu.add_command(label=self.translation["edit_menu"]["cut"], command=self.cut)
@@ -40,14 +59,14 @@ class SettingsWindow(tk.Toplevel):
 
 class Alphard(tk.Tk):
     def __init__(self):
-        tk.Tk.__init__(self)
-        self.title("Alphard V 0.2")
+        self.translation = get_translation()
         
-        # Set the window size to 1920x1080 and maximize it
-        self.geometry("1920x1080")
+        tk.Tk.__init__(self)
+        self.title(self.translation["alphard"] + ' ' + get_version())
+        
+        # maximize the window
         self.state('zoomed')
         
-        self.translation = get_translation()
 
         self.create_menu()
         self.create_table()
@@ -88,15 +107,15 @@ class Alphard(tk.Tk):
 
 
         # Define column headings
-        self.tree.heading("ipadr", text="IP Adress")
-        self.tree.heading("tag", text="Tag")
-        self.tree.heading("userpc", text="User@PC")
-        self.tree.heading("version", text="Version")
-        self.tree.heading("status", text="Status")
-        self.tree.heading("userstatus", text="User Status")
-        self.tree.heading("country", text="Country")
-        self.tree.heading("os", text="Operating System")
-        self.tree.heading("uptime", text="Uptime")
+        self.tree.heading("ipadr", text=self.translation["tree"]["ipadr"])
+        self.tree.heading("tag", text=self.translation["tree"]["tag"])
+        self.tree.heading("userpc", text=self.translation["tree"]["userpc"])
+        self.tree.heading("version", text=self.translation["tree"]["version"])
+        self.tree.heading("status", text=self.translation["tree"]["status"])
+        self.tree.heading("userstatus", text=self.translation["tree"]["userstatus"])
+        self.tree.heading("country", text=self.translation["tree"]["country"])
+        self.tree.heading("os", text=self.translation["tree"]["os"])
+        self.tree.heading("uptime", text=self.translation["tree"]["uptime"])
 
         # Insert some sample data
         data = []
@@ -139,14 +158,9 @@ class Alphard(tk.Tk):
         messagebox.showinfo("Edit", "Pasting clipboard content")
 
     def show_about(self):
-        about_text = "Alphard V 0.2\n\n"
-        about_text += "Alphard is a simple tkinter-based application for managing remote Destops.\n"
-        about_text += "Developed by Semaja Voye\n"
-        about_text += "Contact Discord: letsplay\n"
-        about_text += "GitHub: https://github.com/semajavoye/Alphard\n\n"
-        about_text += "© 2024 Semaja Voyé. All rights reserved."
+        about_text = self.translation["dialogs"]["about"]   
 
-        messagebox.showinfo("About", about_text)
+        messagebox.showinfo(self.translation["dialogs"]["aboutlabel"], about_text)
 
 
 if __name__ == "__main__":
