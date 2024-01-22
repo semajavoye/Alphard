@@ -10,17 +10,17 @@ def get_version():
     return version
 
 class SettingsWindow(tk.Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent, available_languages):
+        self.parent = parent
+        self.available_languages = available_languages
         self.translation = get_translation()
-        
+
         tk.Toplevel.__init__(self, parent)
         self.title(self.translation["file_menu"]["settings"])
-        
+
         self.geometry("680x560")
         self.create_menu()
-        
-        self.parent = parent
-        
+
     def create_menu(self):
         settingslabel = tk.Label(self, text=self.translation["file_menu"]["settings"])
         settingslabel.pack()
@@ -29,24 +29,43 @@ class SettingsWindow(tk.Toplevel):
         selected_language = tk.StringVar()
 
         # Get the available languages
-        available_languages = get_languages()
-        
-        dropdown = tk.OptionMenu(self, selected_language, *available_languages)
+        dropdown = tk.OptionMenu(self, selected_language, *self.available_languages)
         dropdown.pack()
 
         # Set the default language based on the current setting
         selected_language.set(get_settinglanguage())
 
+        # Button to apply language changes
+        apply_button = tk.Button(self, text="Apply", command=lambda: self.apply_language(selected_language.get()))
+        apply_button.pack()
+
+    def apply_language(self, selected_language):
+        # Save the selected language to settings.json
+        with open("settings.json", "r") as f:
+            settings = json.load(f)
+            settings["languageSetting"] = selected_language.lower()
+
+        with open("settings.json", "w") as f:
+            json.dump(settings, f, indent=2)
+
+        # resart the whole application
+        self.parent.destroy()
+        self.parent.__init__()
+
+
 class Alphard(tk.Tk):
     def __init__(self):
-        self.translation = get_translation()
-        
         tk.Tk.__init__(self)
-        self.title(self.translation["alphard"] + ' ' + get_version())
-        
-        # maximize the window
+        self.initialize()
+
+    def initialize(self):
+        self.available_languages = get_languages()
+
+        # Load translation for the initial language setting
+        self.translation = get_translation()
+
+        self.title(self.translation["alphard"] + ' ' + self.get_version())
         self.state('zoomed')
-        
 
         self.create_menu()
         self.create_table()
@@ -85,7 +104,6 @@ class Alphard(tk.Tk):
         # Create a Treeview widget
         self.tree = ttk.Treeview(self, columns=("ipadr", "tag", "userpc", "version", "status", "userstatus", "country", "os", "uptime"), show="headings")
 
-
         # Define column headings
         self.tree.heading("ipadr", text=self.translation["tree"]["ipadr"])
         self.tree.heading("tag", text=self.translation["tree"]["tag"])
@@ -96,12 +114,6 @@ class Alphard(tk.Tk):
         self.tree.heading("country", text=self.translation["tree"]["country"])
         self.tree.heading("os", text=self.translation["tree"]["os"])
         self.tree.heading("uptime", text=self.translation["tree"]["uptime"])
-
-        # Insert some sample data
-        data = []
-
-        for item in data:
-            self.tree.insert("", "end", values=item)
 
         # Pack the Treeview widget
         self.tree.pack(pady=20)
@@ -120,7 +132,7 @@ class Alphard(tk.Tk):
             messagebox.showinfo("Save", f"Saving file to: {file_path}")
             
     def settings(self):
-        settings_window = SettingsWindow(self)
+        settings_window = SettingsWindow(self, self.available_languages)
         
 
     def exit_app(self):
@@ -129,18 +141,24 @@ class Alphard(tk.Tk):
 
     # Additional methods for Edit menu
     def cut(self):
-        messagebox.showinfo("Edit", "Cutting selected text")
+        messagebox.showinfo(self.translation["edit_menu"]["edit"], self.translation["edit_menu"]["cut"])
 
     def copy(self):
-        messagebox.showinfo("Edit", "Copying selected text")
+        messagebox.showinfo(self.translation["edit_menu"]["edit"], self.translation["edit_menu"]["copy"])
 
     def paste(self):
-        messagebox.showinfo("Edit", "Pasting clipboard content")
+        messagebox.showinfo(self.translation["edit_menu"]["edit"], self.translation["edit_menu"]["paste"])
 
     def show_about(self):
         about_text = self.translation["dialogs"]["about"]   
 
         messagebox.showinfo(self.translation["dialogs"]["aboutlabel"], about_text)
+        
+    def get_version(self):
+        with open("settings.json", "r") as f:
+            settings = json.load(f)
+            version = settings["version"]
+        return version
 
 
 if __name__ == "__main__":

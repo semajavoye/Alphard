@@ -2,7 +2,7 @@
 import json
 
 LANGUAGES = {
-    "en": {
+    "english": {
         "alphard": "Alphard",
         "language": "Language",
         "file_menu": {
@@ -46,7 +46,7 @@ LANGUAGES = {
             "uptime": "Uptime"
         }
     },
-    "ger": {
+    "deutsch": {
         "alphard": "Alphard",
         "language": "Sprache",
         "file_menu": {
@@ -93,8 +93,8 @@ LANGUAGES = {
 }
 
 LANGUAGENAMES = {
-    "en": "English",
-    "ger": "Deutsch",
+    "english": "English",
+    "deutsch": "Deutsch",
 }
 
 def get_translation():
