@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import Menu, messagebox, filedialog, ttk
 import json
 from language import get_translation, get_languages, get_settinglanguage
+import check_github_version as alphard_version
+
+# alphard_version.main()
 
 def get_version():
     with open("settings.json", "r") as f:
@@ -159,7 +162,6 @@ class Alphard(tk.Tk):
             settings = json.load(f)
             version = settings["version"]
         return version
-
 
 if __name__ == "__main__":
     app = Alphard()
