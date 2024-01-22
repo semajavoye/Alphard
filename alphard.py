@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import Menu, messagebox, filedialog, ttk
 import json
-from language import get_translation
+from language import get_translation, get_languages, get_settinglanguage
 
 def get_version():
     with open("settings.json", "r") as f:
@@ -12,50 +12,30 @@ def get_version():
 class SettingsWindow(tk.Toplevel):
     def __init__(self, parent):
         self.translation = get_translation()
+        
         tk.Toplevel.__init__(self, parent)
         self.title(self.translation["file_menu"]["settings"])
         
         self.geometry("680x560")
+        self.create_menu()
         
         self.parent = parent
-    
+        
     def create_menu(self):
-        menu_bar = Menu(self)
-        self.config(menu=menu_bar)
+        settingslabel = tk.Label(self, text=self.translation["file_menu"]["settings"])
+        settingslabel.pack()
 
-        # File menu
-        file_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label=self.translation["file_menu"]["file"], menu=file_menu)
+        # Create a StringVar to store the selected language
+        selected_language = tk.StringVar()
 
-        # File menu subcategories
-        file_menu.add_command(label=self.translation["file_menu"]["new"], command=self.new_file)
-        file_menu.add_command(label=self.translation["file_menu"]["open"], command=self.open_file)
-        file_menu.add_command(label=self.translation["file_menu"]["save"], command=self.save_file)
-        file_menu.add_separator()
-        file_menu.add_command(label=self.translation["file_menu"]["settings"], command=self.settings)
-        file_menu.add_command(label=self.translation["file_menu"]["exit"], command=self.exit_app)
-
-        # Edit menu
-        edit_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label=self.translation["edit_menu"]["edit"], menu=edit_menu)
+        # Get the available languages
+        available_languages = get_languages()
         
-        
-        menu_bar = Menu(self)
-        self.config(menu=menu_bar)
-        
-        # Dropdown menu
-        dropdown_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label=self.translation["language"], menu=dropdown_menu)
+        dropdown = tk.OptionMenu(self, selected_language, *available_languages)
+        dropdown.pack()
 
-        # Edit menu subcategories
-        edit_menu.add_command(label=self.translation["edit_menu"]["cut"], command=self.cut)
-        edit_menu.add_command(label=self.translation["edit_menu"]["copy"], command=self.copy)
-        edit_menu.add_command(label=self.translation["edit_menu"]["paste"], command=self.paste)
-
-        # Help menu
-        help_menu = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label=self.translation["help_menu"]["help"], menu=help_menu)
-        help_menu.add_command(label=self.translation["help_menu"]["about"], command=self.show_about)
+        # Set the default language based on the current setting
+        selected_language.set(get_settinglanguage())
 
 class Alphard(tk.Tk):
     def __init__(self):

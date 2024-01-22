@@ -92,6 +92,11 @@ LANGUAGES = {
     },
 }
 
+LANGUAGENAMES = {
+    "en": "English",
+    "ger": "Deutsch",
+}
+
 def get_translation():
     with open("settings.json", "r") as f:
         settings = json.load(f)
@@ -99,3 +104,20 @@ def get_translation():
         
         
     return LANGUAGES.get(language.lower(), LANGUAGES[language])
+
+
+def get_settinglanguage():
+    with open("settings.json", "r") as f:
+        settings = json.load(f)
+        language = settings["languageSetting"]
+        
+    
+    return LANGUAGENAMES.get(language.lower(), LANGUAGENAMES[language])
+
+
+def get_languages():
+    available_languages = []
+    for language_code in LANGUAGES:
+        available_languages.append(LANGUAGENAMES.get(language_code))
+        
+    return available_languages
