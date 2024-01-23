@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QMenuBar, QAction, QLabel, QComboBox, QPushButton, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QMessageBox, QFileDialog, QSizePolicy, QHeaderView  # Add this line
 from PyQt5.QtCore import Qt
+from PyQt5 import QtGui
 import json
 from language import get_translation, get_languages, get_settinglanguage
 import check_github_version as alphard_version
@@ -67,6 +68,8 @@ class Alphard(QMainWindow):
 
         # Load translation for the initial language setting
         self.translation = get_translation()
+        
+        self.setWindowIcon(QtGui.QIcon('assets/images/icon.ico'))
 
         self.setWindowTitle(f"{self.translation['alphard']} {self.get_version()}")
         self.setWindowState(Qt.WindowMaximized)  # Maximize window on startup
